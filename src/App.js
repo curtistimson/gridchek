@@ -1,13 +1,15 @@
 import React from 'react';
 import { Router, Route } from 'react-router-dom';
+import { connect } from 'react-redux'
+import ReactGA from 'react-ga';
 import './App.css';
 import Login from './components/Login';
+import Logout from './components/Logout';
 import history from './history';
 import AuthCallback from './components/AuthCallback';
-import ReactGA from 'react-ga';
 import config from './config';
 
-function App() {
+function App(props) {
 
   ReactGA.initialize(config.googleAnalytics.trackingId, {
     debug: config.debug,
@@ -19,7 +21,11 @@ function App() {
       <Route exact path="/" render={() => (
         <div className="App">
           <header className="App-header">
-            <Login/>
+            {
+              !props.auth.isAuthenticated ?
+              <Login/>
+              : <Logout/>
+            }
           </header>
         </div>
       )} />
@@ -28,4 +34,8 @@ function App() {
   );
 }
 
-export default App;
+export default connect((store) => {
+  return {
+    auth: store.auth,
+  };
+})(App);
