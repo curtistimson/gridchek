@@ -6,6 +6,9 @@ const prod = {
     audience: '',
   },
   debug: false,
+  googleAnalytics: {
+    trackingId: 'UA-52569437-1',
+  },
 };
 
 const dev = {
@@ -16,6 +19,9 @@ const dev = {
     audience: 'https://gridchek-dev.com',
   },
   debug: true,
+  googleAnalytics: {
+    trackingId: 'UA-52569437-2',
+  },
 };
 
 const config = process.env.REACT_APP_STAGE === 'production'

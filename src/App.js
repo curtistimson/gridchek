@@ -4,8 +4,16 @@ import './App.css';
 import Login from './components/Login';
 import history from './history';
 import AuthCallback from './components/AuthCallback';
+import ReactGA from 'react-ga';
+import config from './config';
 
 function App() {
+
+  ReactGA.initialize(config.googleAnalytics.trackingId, {
+    debug: config.debug,
+  });
+  ReactGA.pageview(window.location.pathname + window.location.search);
+
   return (
     <Router history={history}>
       <Route exact path="/" render={() => (
