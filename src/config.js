@@ -1,9 +1,9 @@
 const prod = {
   auth0: {
-    domain: '',
-    clientID: '',
-    redirectUri: '',
-    audience: '',
+    domain: 'gridchek.eu.auth0.com',
+    clientID: 'an5QndvNJmvFzzT1pqsD7yLX108JG5kO',
+    redirectUri: 'https://gridchek.netlify.com/auth-callback',
+    audience: 'https://gridchek.com',
   },
   debug: false,
   googleAnalytics: {
