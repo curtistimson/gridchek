@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Router, Route } from 'react-router-dom';
+import { connect } from 'react-redux'
+import ReactGA from 'react-ga';
 import './App.css';
+import Login from './components/Login';
+import Logout from './components/Logout';
+import history from './history';
+import AuthCallback from './components/AuthCallback';
+import config from './config';
 
-function App() {
+function App(props) {
+
+  ReactGA.initialize(config.googleAnalytics.trackingId, {
+    debug: config.debug,
+  });
+  ReactGA.pageview(window.location.pathname + window.location.search);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={history}>
+      <Route exact path="/" render={() => (
+        <div className="App">
+          <header className="App-header">
+            {
+              !props.auth.isAuthenticated ?
+              <Login/>
+              : <Logout/>
+            }
+          </header>
+        </div>
+      )} />
+      <Route exact path="/auth-callback" component={AuthCallback} />
+    </Router>
   );
 }
 
-export default App;
+export default connect((store) => {
+  return {
+    auth: store.auth,
+  };
+})(App);
