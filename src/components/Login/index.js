@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { requestLogin } from '../../actions/authActions';
+import Button from 'react-bootstrap/Button';
 
 class Login extends Component {
   render() {
@@ -11,7 +12,7 @@ class Login extends Component {
     }
 
     return (
-      <button onClick={openAuth0}>Login</button>
+      <Button onClick={openAuth0}>Login</Button>
     )
   }
 }
