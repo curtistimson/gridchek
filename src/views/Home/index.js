@@ -14,7 +14,7 @@ class Home extends Component {
 
                 location.getCurrentPosition((position) => {
             
-                    let openCode = olc.encode(position.coords.latitude, position.coords.longitude);
+                    let openCode = olc.encode(position.coords.latitude, position.coords.longitude, 11);
                     console.log(openCode);
 
                     resolve({
