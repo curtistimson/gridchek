@@ -9,18 +9,12 @@ class Location extends Component {
       this.state = {
         latitude: null,
         longitude: null,
-        openCode: ``
+        openCode: this.props.match.params.code,
       }
     }
 
     render() {
-
       const olc = new OpenLocationCode();
-
-      console.log('ccc', this.props.match.params.code);
-
-      console.log(olc.decode(this.props.match.params.code));
-
       const codeDetails = olc.decode(this.props.match.params.code);
 
       return (

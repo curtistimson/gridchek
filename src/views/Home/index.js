@@ -8,8 +8,6 @@ class Home extends Component {
     getLocation() {
         return new Promise((resolve, reject) => {
             const location = window.navigator && window.navigator.geolocation;
-
-            console.log('sdsd');
             
             if (location) {
                 const olc = new OpenLocationCode;
