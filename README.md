@@ -1,3 +1,8 @@
+# Gridchek
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6529608a-44bd-48d6-808f-3f6dbc3ef993/deploy-status)](https://app.netlify.com/sites/gridchek/deploys)
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
