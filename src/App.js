@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import ReactGA from 'react-ga';
 import history from './history';
 import AuthCallback from './components/AuthCallback';
-import CheckIn from './views/CheckIn';
+import Home from './views/Home';
+import Location from './views/Location';
 import config from './config';
 import Button from 'react-bootstrap/Button';
 import Header from './components/Header';
@@ -20,13 +21,9 @@ function App(props) {
     <div>
       <Header/>
       <Router history={history}>
-        <Route exact path="/" render={() => (
-          <div>
-            <Button href='/checkin'>Check In</Button>
-          </div>
-        )} />
+        <Route exact path="/" component={Home} />
         <Route exact path="/auth-callback" component={AuthCallback} />
-        <Route exact path="/checkin" component={CheckIn} />
+        <Route exact path="/l/:code" component={Location} />
       </Router>
     </div>
   );
