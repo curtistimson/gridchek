@@ -18,7 +18,7 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ "success": true })
     }
   } catch (err) {
-    console.log('product.create', err) // output to netlify function log
+    console.log('checkin.create', err) // output to netlify function log
     return {
       statusCode: 500,
       body: JSON.stringify({msg: err.message})
