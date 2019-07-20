@@ -3,8 +3,6 @@ import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import compression from 'compression'
-import jwt from 'express-jwt';
-import jwks from 'jwks-rsa';
 
 /* My express App */
 export default function expressApp(functionName) {
@@ -17,30 +15,7 @@ export default function expressApp(functionName) {
   // Set router base path for local dev
   const routerBasePath = process.env.NODE_ENV === 'dev' ? `/${functionName}` : `/.netlify/functions/${functionName}/`
 
-  const jwtCheck = jwt({
-    secret: jwks.expressJwtSecret({
-      cache: true,
-      rateLimit: true,
-      jwksRequestsPerMinute: 5,
-      jwksUri: process.env.Auth_JwksUri
-    }),
-    audience: process.env.Auth_Audience,
-    issuer: process.env.Auth_Issuer,
-    algorithm: 'RS256'
-  });
-
-  router.get('/users', jwtCheck, (req, res) => {
-    res.json({
-      users: [
-        {
-          name: 'steve',
-        },
-        {
-          name: 'jose',
-        },
-      ],
-    })
-  })
+  require('./routes/checkinCreate')(router);
 
   // Setup routes
   app.use(routerBasePath, router)

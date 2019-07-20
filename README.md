@@ -10,9 +10,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ```
 DB_URL=
 
-Auth_Audience=
-Auth_Issuer=
-Auth_JwksUri=
+auth0Audience=
+auth0Issuer=
+auth0JwksUri=
 ```
 
 

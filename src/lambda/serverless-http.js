@@ -3,6 +3,10 @@ import expressApp from './app'
 
 const functionName = 'serverless-http'
 
+if (!process.env.prod){
+  require('./config/dev');
+}
+
 // Initialize express app
 const app = expressApp(functionName)
 
