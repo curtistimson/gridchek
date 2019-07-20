@@ -3,6 +3,7 @@ import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import compression from 'compression'
+import checkinCreate from './routes/checkinCreate';
 
 /* My express App */
 export default function expressApp(functionName) {
@@ -15,7 +16,7 @@ export default function expressApp(functionName) {
   // Set router base path for local dev
   const routerBasePath = process.env.NODE_ENV === 'dev' ? `/${functionName}` : `/.netlify/functions/${functionName}/`
 
-  require('./routes/checkinCreate')(router);
+  checkinCreate(router);
 
   // Setup routes
   app.use(routerBasePath, router)

@@ -1,7 +1,7 @@
-const expressJwt = require('express-jwt');
-const jwks = require('jwks-rsa');
+import expressJwt from 'express-jwt';
+import jwks from 'jwks-rsa';
 
-module.exports = (router) => {
+export default (router) => {
 
   const jwtCheck = expressJwt({
     secret: jwks.expressJwtSecret({
