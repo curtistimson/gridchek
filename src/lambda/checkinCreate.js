@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import db from './server'
+import db from './db'
 import checkin from './models/checkin';
 
 exports.handler = async (event, context) => {

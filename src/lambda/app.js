@@ -8,7 +8,7 @@ import checkinCreate from './routes/checkinCreate';
 /* My express App */
 export default function expressApp(functionName) {
   const app = express()
-  const router = express.Router()
+  const router = express.Router();
 
   // gzip responses
   router.use(compression())

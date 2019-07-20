@@ -1,5 +1,8 @@
 import expressJwt from 'express-jwt';
 import jwks from 'jwks-rsa';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export default class authHelper {
 
@@ -8,7 +11,7 @@ export default class authHelper {
         cache: true,
         rateLimit: true,
         jwksRequestsPerMinute: 5,
-        jwksUri: process.env.auth0JwksUri
+        jwksUri: process.env.auth0JwksUri,
     }),
     audience: process.env.auth0Audience,
     issuer: process.env.auth0Issuer,
