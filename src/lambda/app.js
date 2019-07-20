@@ -22,10 +22,10 @@ export default function expressApp(functionName) {
       cache: true,
       rateLimit: true,
       jwksRequestsPerMinute: 5,
-      jwksUri: `https://gridchek-dev.eu.auth0.com/.well-known/jwks.json`
+      jwksUri: process.env.Auth_JwksUri
     }),
-    audience: `https://gridchek-dev.com`,
-    issuer: `https://gridchek-dev.eu.auth0.com/`,
+    audience: process.env.Auth_Audience,
+    issuer: process.env.Auth_Issuer,
     algorithm: 'RS256'
   });
 
