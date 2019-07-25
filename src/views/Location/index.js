@@ -12,14 +12,54 @@ class Location extends Component {
       this.state = {
         latitude: null,
         longitude: null,
-        openCode: this.props.match.params.code,
+        openCode: null,// this.props.match.params.code,
       }
+    }
+
+    getLocation() {
+      return new Promise((resolve, reject) => {
+          const location = window.navigator && window.navigator.geolocation;
+          
+          if (location) {
+              const olc = new OpenLocationCode;
+
+              location.getCurrentPosition((position) => {
+          
+                  let openCode = olc.encode(position.coords.latitude, position.coords.longitude, 11);
+                  console.log(openCode);
+
+                  resolve({
+                      latitude: position.coords.latitude,
+                      longitude: position.coords.longitude,
+                      openCode,
+                  })
+              }, (error) => {
+                  console.log('Error');
+                  reject();
+              })
+          }
+      });
+    }
+
+    componentWillMount(){
+      this.getLocation().then(data => {
+        this.setState({
+          ...this.state,
+          openCode: data.openCode,
+        });
+      });
     }
 
     render() {
       const { dispatch } = this.props;
-      const olc = new OpenLocationCode();
-      const codeDetails = olc.decode(this.props.match.params.code);
+
+      let olc = null;
+      let codeDetails = null;
+
+      if (this.state.openCode){
+        olc = new OpenLocationCode();
+        codeDetails = olc.decode(this.state.openCode);
+      }
 
       const checkIn = () => {
         dispatch(createCheckIn(this.state.openCode));
@@ -27,9 +67,16 @@ class Location extends Component {
 
       return (
         <div>
-          <h1>{this.state.openCode}</h1>
-          <Map position={[codeDetails.latitudeCenter, codeDetails.longitudeCenter]} />
-          <Button onClick={checkIn}>Check In</Button>
+          {
+            this.state.openCode ?
+              <div>
+                <h1>{this.state.openCode}</h1>
+                <Map position={[codeDetails.latitudeCenter, codeDetails.longitudeCenter]} />
+                <Button onClick={checkIn}>Check In</Button>
+              </div>
+            : <div/>
+          }
+          
         </div>
       )
     }

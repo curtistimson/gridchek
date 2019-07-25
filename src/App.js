@@ -23,7 +23,7 @@ function App() {
       <Router history={history}>
         <Route exact path="/" component={Home} />
         <Route exact path="/auth-callback" component={AuthCallback} />
-        <Route exact path="/l/:code" component={Location} />
+        <Route exact path="/checkin" component={Location} />
       </Router>
     </Container>
   );
