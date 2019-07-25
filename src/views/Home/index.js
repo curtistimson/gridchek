@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
-import { OpenLocationCode } from 'open-location-code';
 import history from '../../history';
 
 class Home extends Component {
