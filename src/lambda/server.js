@@ -3,7 +3,9 @@ import express from 'express';
 import serverless from 'serverless-http';
 import bodyParser from 'body-parser';
 
-import checkinCreate from './routes/checkinCreate';
+// import checkinCreate from './routes/checkinCreate';
+// import userCheckins from './routes/userCheckins';
+import routes from './routes';
 
 const app = express();
 
@@ -13,10 +15,11 @@ router.get('/', (req, res) => {
   res.write('<h1>Hello from Express.js!</h1>');
   res.end();
 });
-router.get('/another', (req, res) => res.json({ route: req.originalUrl }));
-router.post('/', (req, res) => res.json({ postBody: req.body }));
 
-checkinCreate(router);
+// checkinCreate(router);
+// userCheckins(router);
+routes(router);
+
 
 app.use(bodyParser.urlencoded({'extended':'true'}));
 app.use(bodyParser.json());
