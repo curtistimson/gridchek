@@ -6,11 +6,13 @@ export default (router) => {
 
   router.post('/checkinCreate', authHelper.jwtCheck, (req, res) => {
 
+    const userid = req.user.sub;
+
     checkin.create({
       _id: mongoose.Types.ObjectId(),
       date: new Date(),
-      plusCode: 'test',
-      userId: '45678',
+      plusCode: req.body.code,
+      userId: userid,
     }, (err, checkin) => {
       if (err){
         res.status(500).send();

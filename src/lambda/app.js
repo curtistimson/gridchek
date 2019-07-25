@@ -21,6 +21,7 @@ export default function expressApp(functionName) {
   // Setup routes
   app.use(routerBasePath, router)
 
+
   // Apply express middlewares
   router.use(cors())
   router.use(bodyParser.json())
