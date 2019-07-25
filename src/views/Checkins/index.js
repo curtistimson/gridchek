@@ -20,8 +20,8 @@ class Checkins extends Component {
             <Row>
               {
                 this.props.userCheckins.checkins && this.props.userCheckins.checkins.map(checkin => (
-                  <Col>
-                    <Card style={{ }}>
+                  <Col sm={4}>
+                    <Card style={{ marginTop: '1em' }}>
                       <Card.Body>
                           <Card.Title>{checkin.plusCode}</Card.Title>
                       </Card.Body>
