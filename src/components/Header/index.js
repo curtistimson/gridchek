@@ -10,23 +10,23 @@ import Col from 'react-bootstrap/Col';
 function Header(props) {
         return (
           <Row>
-<Col>
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Navbar.Brand href='/'>Gridchek</Navbar.Brand>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav">
-              <Nav>
-                <Nav.Link>
-                  {
-                    !props.auth.isAuthenticated ?
-                    <Login/>
-                    : <Logout/>
-                  }
-                </Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
-          </Col>
+            <Col>
+              <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+              <Navbar.Brand href='/'>Gridchek</Navbar.Brand>
+              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+              <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav>
+                  <Nav.Link>
+                    {
+                      !props.auth.isAuthenticated ?
+                      <Login/>
+                      : <Logout/>
+                    }
+                  </Nav.Link>
+                </Nav>
+              </Navbar.Collapse>
+            </Navbar>
+            </Col>
           </Row>
         )
 }

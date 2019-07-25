@@ -9,6 +9,7 @@ const prod = {
   googleAnalytics: {
     trackingId: 'UA-52569437-1',
   },
+  serviceUri: '',
 };
 
 const dev = {
@@ -22,6 +23,7 @@ const dev = {
   googleAnalytics: {
     trackingId: 'UA-52569437-2',
   },
+  serviceUri: 'http://localhost:9000',
 };
 
 const config = process.env.REACT_APP_STAGE === 'production'
