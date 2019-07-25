@@ -11,21 +11,29 @@ class Checkins extends Component {
   componentDidMount() {
     this.props.dispatch(fetchUserCheckins());
   }
-    render() {
-        return (
-            <div>
-              <Row>
-                <Col>
-                  <Card style={{ width: '18rem' }}>
-                    <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
-                    </Card.Body>
+
+  render() {
+    console.log(this.props); 
+      return (
+          <div>
+            <Row>
+              {
+                this.props.userCheckins.checkins && this.props.userCheckins.checkins.map(checkin => (
+                  <Col>
+                    <Card style={{ width: '18rem' }}>
+                      <Card.Body>
+                          <Card.Title>{checkin.plusCode}</Card.Title>
+                      </Card.Body>
                     </Card>
                   </Col>
-                </Row>
-            </div>
-        )
-    }
+                ))
+              }
+              </Row>
+          </div>
+      )
+  }
 }
 
-export default connect()(Checkins);
+export default connect(store => ({
+  userCheckins: store.userCheckins,
+}))(Checkins);
