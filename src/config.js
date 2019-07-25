@@ -9,7 +9,7 @@ const prod = {
   googleAnalytics: {
     trackingId: 'UA-52569437-1',
   },
-  serviceUri: 'https://gridchek.netlify.com/.netlify/functions',
+  serviceUri: 'https://gridchek.netlify.com/.netlify/functions/server',
 };
 
 const dev = {
@@ -23,7 +23,7 @@ const dev = {
   googleAnalytics: {
     trackingId: 'UA-52569437-2',
   },
-  serviceUri: 'http://localhost:9000',
+  serviceUri: 'http://localhost:9000/.netlify/functions/server',
 };
 
 const config = process.env.REACT_APP_STAGE === 'production'
