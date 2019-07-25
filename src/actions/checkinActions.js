@@ -27,3 +27,17 @@ export function createCheckIn(plusCode) {
     });
   };
 }
+
+export function fetchUserCheckins() {
+  return (dispatch) => {
+    dispatch({ type: 'FETCH_USER_CHECKINS_PENDING' });
+    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(AUTH_ACCESS_TOKEN)}`;
+    axios.get(`${config.serviceUri}/.netlify/functions/server/user/checkins`)
+      .then((res) => {
+        dispatch({ type: 'FETCH_USER_CHECKINS_FULFILLED', payload: res.data });
+      })
+      .catch((error) => {
+        dispatch({ type: 'FETCH_USER_CHECKINS_REJECTED', payload: error });
+      });
+  };
+}
