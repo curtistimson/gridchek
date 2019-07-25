@@ -20,11 +20,17 @@ router.get('/', (req, res) => {
 // userCheckins(router);
 routes(router);
 
-
 app.use(bodyParser.urlencoded({'extended':'true'}));
 app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
-app.use('/.netlify/functions/server', router);  // path must route to lambda
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Authorization");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+  next();
+});
+
+app.use('/.netlify/functions/server', router);
 
 export const handler = serverless(app);

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { OpenLocationCode } from 'open-location-code';
 import Map from '../../components/Map';
+import Button from 'react-bootstrap/Button';
+import { createCheckIn } from '../../actions/checkinActions';
 
 class Location extends Component {
 
@@ -9,21 +12,74 @@ class Location extends Component {
       this.state = {
         latitude: null,
         longitude: null,
-        openCode: this.props.match.params.code,
+        openCode: null,// this.props.match.params.code,
       }
     }
 
+    getLocation() {
+      return new Promise((resolve, reject) => {
+          const location = window.navigator && window.navigator.geolocation;
+          
+          if (location) {
+              const olc = new OpenLocationCode;
+
+              location.getCurrentPosition((position) => {
+          
+                  let openCode = olc.encode(position.coords.latitude, position.coords.longitude, 11);
+                  console.log(openCode);
+
+                  resolve({
+                      latitude: position.coords.latitude,
+                      longitude: position.coords.longitude,
+                      openCode,
+                  })
+              }, (error) => {
+                  console.log('Error');
+                  reject();
+              })
+          }
+      });
+    }
+
+    componentWillMount(){
+      this.getLocation().then(data => {
+        this.setState({
+          ...this.state,
+          openCode: data.openCode,
+        });
+      });
+    }
+
     render() {
-      const olc = new OpenLocationCode();
-      const codeDetails = olc.decode(this.props.match.params.code);
+      const { dispatch } = this.props;
+
+      let olc = null;
+      let codeDetails = null;
+
+      if (this.state.openCode){
+        olc = new OpenLocationCode();
+        codeDetails = olc.decode(this.state.openCode);
+      }
+
+      const checkIn = () => {
+        dispatch(createCheckIn(this.state.openCode));
+      }
 
       return (
         <div>
-          <h1>{this.state.openCode}</h1>
-          <Map position={[codeDetails.latitudeCenter, codeDetails.longitudeCenter]} />
+          {
+            this.state.openCode ?
+              <div>
+                <h1>{this.state.openCode}</h1>
+                <Map position={[codeDetails.latitudeCenter, codeDetails.longitudeCenter]} />
+                <Button onClick={checkIn}>Check In</Button>
+              </div>
+            : <div/>
+          }
+          
         </div>
       )
     }
 }
 
-export default Location;
+export default connect()(Location);
