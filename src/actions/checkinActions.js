@@ -8,7 +8,7 @@ export function createCheckIn(plusCode) {
   return (dispatch) => {
     dispatch({ type: 'CHECKIN_CREATE_PENDING', payload: { plusCode } });
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(AUTH_ACCESS_TOKEN)}`;
-    axios.post(`${config.serviceUri}/.netlify/functions/server/checkinCreate`, {
+    axios.post(`${config.serviceUri}/checkinCreate`, {
       code: plusCode,
     }).then(res => {
       dispatch({ type: 'CHECKIN_CREATE_FULFILLED', payload: res.data });
@@ -32,7 +32,7 @@ export function fetchUserCheckins() {
   return (dispatch) => {
     dispatch({ type: 'FETCH_USER_CHECKINS_PENDING' });
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(AUTH_ACCESS_TOKEN)}`;
-    axios.get(`${config.serviceUri}/.netlify/functions/server/user/checkins`)
+    axios.get(`${config.serviceUri}/user/checkins`)
       .then((res) => {
         dispatch({ type: 'FETCH_USER_CHECKINS_FULFILLED', payload: res.data });
       })
