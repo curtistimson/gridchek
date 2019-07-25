@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Router, Route } from 'react-router-dom';
+import { connect } from 'react-redux'
+import ReactGA from 'react-ga';
+import history from './history';
+import AuthCallback from './components/AuthCallback';
+import Home from './views/Home';
+import Location from './views/Location';
+import config from './config';
+import Header from './components/Header';
+import Container from 'react-bootstrap/Container';
 
 function App() {
+
+  ReactGA.initialize(config.googleAnalytics.trackingId, {
+    debug: config.debug,
+  });
+  ReactGA.pageview(window.location.pathname + window.location.search);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container fluid style={{ paddingLeft:0, paddingRight:0 }}>
+      <Header/>
+      <Router history={history}>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/auth-callback" component={AuthCallback} />
+        <Route exact path="/l/:code" component={Location} />
+      </Router>
+    </Container>
   );
 }
 
-export default App;
+export default connect((store) => {
+  return {
+    auth: store.auth,
+  };
+})(App);
