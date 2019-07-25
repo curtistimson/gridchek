@@ -16,11 +16,12 @@ class Checkins extends Component {
     console.log(this.props); 
       return (
           <div>
+            <h1>Recent Checkins</h1>
             <Row>
               {
                 this.props.userCheckins.checkins && this.props.userCheckins.checkins.map(checkin => (
                   <Col>
-                    <Card style={{ width: '18rem' }}>
+                    <Card style={{ }}>
                       <Card.Body>
                           <Card.Title>{checkin.plusCode}</Card.Title>
                       </Card.Body>
