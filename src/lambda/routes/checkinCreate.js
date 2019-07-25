@@ -8,6 +8,9 @@ export default (router) => {
 
     const userid = req.user.sub;
 
+    console.log('req.bo', req.body);
+    console.log('req.body.code', req.body.code);
+
     checkin.create({
       _id: mongoose.Types.ObjectId(),
       date: new Date(),
