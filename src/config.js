@@ -9,7 +9,7 @@ const prod = {
   googleAnalytics: {
     trackingId: 'UA-52569437-1',
   },
-  serviceUri: '',
+  serviceUri: 'https://gridchek.netlify.com/.netlify/functions',
 };
 
 const dev = {

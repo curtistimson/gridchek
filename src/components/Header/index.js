@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 function Header(props) {
+
         return (
           <Row>
             <Col>
@@ -16,13 +17,19 @@ function Header(props) {
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav>
-                  <Nav.Link>
                     {
                       !props.auth.isAuthenticated ?
+                      <Nav.Link>
                       <Login/>
-                      : <Logout/>
+                      </Nav.Link>
+                      : 
+                      <div>
+                        <Nav.Link href="/checkins">Recent Checkins</Nav.Link>
+                      <Nav.Link>
+                          <Logout/>
+                        </Nav.Link>
+                        </div>
                     }
-                  </Nav.Link>
                 </Nav>
               </Navbar.Collapse>
             </Navbar>

@@ -5,7 +5,7 @@ import Map from '../../components/Map';
 import Button from 'react-bootstrap/Button';
 import { createCheckIn } from '../../actions/checkinActions';
 
-class Location extends Component {
+class Checkin extends Component {
 
   constructor(props) {
     super(props);
@@ -82,4 +82,4 @@ class Location extends Component {
     }
 }
 
-export default connect()(Location);
+export default connect()(Checkin);
