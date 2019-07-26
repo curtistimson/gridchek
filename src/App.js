@@ -9,7 +9,6 @@ import Header from './components/Header';
 import Container from 'react-bootstrap/Container';
 
 import Home from './views/Home';
-import Checkins from './views/Checkins';
 import Checkin from './views/Checkin';
 
 function App() {
@@ -26,7 +25,6 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/auth-callback" component={AuthCallback} />
         <Route exact path="/checkin" component={Checkin} />
-        <Route exact path="/checkins" component={Checkins} />
       </Router>
     </Container>
   );
