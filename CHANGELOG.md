@@ -4,6 +4,7 @@
 `0.6.1-dev`
 # Minor
  - Move checkins to home
+ - Improve checkin success message
 
 ---
 `0.2.0`

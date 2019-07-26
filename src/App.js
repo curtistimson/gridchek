@@ -11,6 +11,7 @@ import { checkAuthentication } from './actions/authActions';
 
 import Home from './views/Home';
 import Checkin from './views/Checkin';
+import CheckinSuccess from './views/CheckinSuccess';
 
 class App extends Component {
   constructor() {
@@ -33,6 +34,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/auth-callback" component={AuthCallback} />
           <Route exact path="/checkin" component={Checkin} />
+          <Route exact path="/checkin/success" component={CheckinSuccess} />
         </Router>
       </Container>
     )
