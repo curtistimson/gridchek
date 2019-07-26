@@ -5,6 +5,7 @@ export default function reducer(state = {
       case 'FETCH_USER_CHECKINS_FULFILLED': {
         return {
           ...state,
+          count: action.payload.count,
           checkins: action.payload.checkins,
         };
       }

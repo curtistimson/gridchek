@@ -25,7 +25,7 @@ class Home extends Component {
             <div>
                 <Button onClick={locationRedirect}>Check In</Button>
             </div>
-            <h1>Recent Checkins</h1>
+            <h2>{this.props.userCheckins.count} Checkins</h2>
             <Row>
               {
                 this.props.userCheckins.checkins && this.props.userCheckins.checkins.map(checkin => (
