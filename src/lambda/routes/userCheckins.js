@@ -10,12 +10,15 @@ export default (router) => {
 
     checkin.find({
       userId,
-    }, (err, checkins) => {
+    })
+    .sort({ date: 'desc' })
+    .exec((err, checkins) => {
       if (err){
         res.status(500).send();
       }
       res.json({
-        checkins: checkins.map(checkin => checkinViewModel(checkin))
+        checkins: checkins.map(checkin => checkinViewModel(checkin)),
+        count: checkins.length,
       })
     });
     

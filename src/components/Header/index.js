@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Login from '../Login';
@@ -24,7 +24,7 @@ function Header(props) {
                       </Nav.Link>
                       : 
                       <div>
-                        <Nav.Link href="/checkins">Recent Checkins</Nav.Link>
+                        <Nav.Link href="/">Home</Nav.Link>
                       <Nav.Link>
                           <Logout/>
                         </Nav.Link>
