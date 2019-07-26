@@ -23,8 +23,8 @@ const setSession = (authResult) => {
   localStorage.setItem(AUTH_EXPIRES_AT, expiresAt);
 };
 
-const renewToken = (dispatch) => {
-  return new Promise((resolve) => {
+const renewToken = dispatch => (
+  new Promise((resolve) => {
     auth.checkSession({}, (err, result) => {
       if (err) {
         dispatch({ type: 'LOGIN_EXPIRED' });
@@ -44,11 +44,11 @@ const renewToken = (dispatch) => {
         });
         ReactGA.event({ category: 'Authentication', action: 'Token Renew Success' });
         resolve({ renewed: true });
-        setLoginExpiryTimeout(dispatch);
+        setLoginExpiryTimeout(dispatch); // eslint-disable-line
       }
     });
-  });
-};
+  })
+);
 
 const setLoginExpiryTimeout = (dispatch) => {
   const sessionTimeout = localStorage.getItem(AUTH_EXPIRES_AT) - new Date().getTime();
