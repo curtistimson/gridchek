@@ -1,20 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { logout } from '../../actions/authActions';
+import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
+import { logout } from '../../actions/authActions';
 
-class Login extends Component {
-  render() {
-    const { dispatch } = this.props;
+function Logout(props) {
+  const { dispatch } = props;
 
-    const sendLogout = () => {
-      dispatch(logout());
-    }
+  const sendLogout = () => {
+    dispatch(logout());
+  };
 
-    return (
-      <Button onClick={sendLogout}>Logout</Button>
-    )
-  }
+  return (
+    <Button onClick={sendLogout}>Logout</Button>
+  );
 }
 
-export default connect()(Login);
+Logout.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
+export default connect()(Logout);
