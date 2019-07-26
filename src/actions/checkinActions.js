@@ -7,17 +7,17 @@ const AUTH_ACCESS_TOKEN = 'auth_access_token';
 export function createCheckIn(plusCode) {
   return (dispatch) => {
     dispatch({ type: 'CHECKIN_CREATE_PENDING', payload: { plusCode } });
-    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(AUTH_ACCESS_TOKEN)}`;
+    axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem(AUTH_ACCESS_TOKEN)}`;
     axios.post(`${config.serviceUri}/checkinCreate`, {
       code: plusCode,
-    }).then(res => {
+    }).then((res) => {
       dispatch({ type: 'CHECKIN_CREATE_FULFILLED', payload: res.data });
       ReactGA.event({
         category: 'Check In',
         action: 'Add',
         label: plusCode,
       });
-    }).catch(err => {
+    }).catch((err) => {
       dispatch({ type: 'CHECKIN_CREATE_REJECTED', payload: err });
       ReactGA.event({
         category: 'Error',
@@ -31,7 +31,7 @@ export function createCheckIn(plusCode) {
 export function fetchUserCheckins() {
   return (dispatch) => {
     dispatch({ type: 'FETCH_USER_CHECKINS_PENDING' });
-    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(AUTH_ACCESS_TOKEN)}`;
+    axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem(AUTH_ACCESS_TOKEN)}`;
     axios.get(`${config.serviceUri}/user/checkins`)
       .then((res) => {
         dispatch({ type: 'FETCH_USER_CHECKINS_FULFILLED', payload: res.data });
