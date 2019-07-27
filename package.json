@@ -1,6 +1,6 @@
 {
   "name": "gridchek",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "private": true,
   "dependencies": {
     "@babel/core": "7.4.3",
@@ -85,12 +85,12 @@
   "scripts": {
     "start": "run-p start:**",
     "start:app": "node scripts/start.js",
-    "start:lambda": "netlify-lambda serve src/lambda",
     "build": "run-p build:**",
     "build:app": "node scripts/build.js",
-    "build:lambda": "netlify-lambda build src/lambda",
     "test": "node scripts/test.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "start:lambda": "node scripts/start_lambda.js",
+    "build:lambda": "node scripts/build_lambda.js"
   },
   "eslintConfig": {
     "extends": "react-app"
