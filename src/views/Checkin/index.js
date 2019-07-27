@@ -61,7 +61,7 @@ class Checkin extends Component {
       </div>
     );
   }
-};
+}
 
 Checkin.propTypes = {
   dispatch: PropTypes.func.isRequired,

@@ -4,7 +4,7 @@ export default () => (
   new Promise((resolve, reject) => {
     const location = window.navigator && window.navigator.geolocation;
     if (location) {
-      const olc = new OpenLocationCode;
+      const olc = new OpenLocationCode();
       location.getCurrentPosition((position) => {
         const openCode = olc.encode(position.coords.latitude, position.coords.longitude, 11);
         resolve({
