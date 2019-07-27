@@ -1,20 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { requestLogin } from '../../actions/authActions';
+import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
+import { requestLogin } from '../../actions/authActions';
 
-class Login extends Component {
-  render() {
-    const { dispatch } = this.props;
+function Login(props) {
+  const { dispatch } = props;
 
-    const openAuth0 = () => {
-      dispatch(requestLogin());
-    }
+  const openAuth0 = () => {
+    dispatch(requestLogin());
+  };
 
-    return (
-      <Button onClick={openAuth0}>Login</Button>
-    )
-  }
+  return (
+    <Button onClick={openAuth0}>Login</Button>
+  );
 }
+
+Login.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
 
 export default connect()(Login);
