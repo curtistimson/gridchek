@@ -1,85 +1,77 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
 import { OpenLocationCode } from 'open-location-code';
-import Map from '../../components/Map';
 import Button from 'react-bootstrap/Button';
+// import Map from '../../components/Map';
 import { createCheckIn } from '../../actions/checkinActions';
+import getLocation from './getLocation';
 
 class Checkin extends Component {
-
   constructor(props) {
     super(props);
-      this.state = {
-        latitude: null,
-        longitude: null,
-        openCode: null,// this.props.match.params.code,
-      }
+    this.state = {
+      openCode: null,
+    };
+  }
+
+  componentWillMount() {
+    getLocation().then((data) => {
+      this.setState(() => ({
+        openCode: data.openCode,
+      }));
+    });
+  }
+
+  render() {
+    const { dispatch } = this.props;
+
+    const { openCode } = this.state;
+
+    let olc = null;
+    let codeDetails = null;
+
+    if (openCode) {
+      olc = new OpenLocationCode();
+      codeDetails = olc.decode(openCode);
     }
 
-    getLocation() {
-      return new Promise((resolve, reject) => {
-          const location = window.navigator && window.navigator.geolocation;
-          
-          if (location) {
-              const olc = new OpenLocationCode;
+    const checkIn = () => {
+      dispatch(createCheckIn(openCode));
+    };
 
-              location.getCurrentPosition((position) => {
-          
-                  let openCode = olc.encode(position.coords.latitude, position.coords.longitude, 11);
-                  console.log(openCode);
-
-                  resolve({
-                      latitude: position.coords.latitude,
-                      longitude: position.coords.longitude,
-                      openCode,
-                  })
-              }, (error) => {
-                  console.log('Error');
-                  reject();
-              })
-          }
-      });
-    }
-
-    componentWillMount(){
-      this.getLocation().then(data => {
-        this.setState({
-          ...this.state,
-          openCode: data.openCode,
-        });
-      });
-    }
-
-    render() {
-      const { dispatch } = this.props;
-
-      let olc = null;
-      let codeDetails = null;
-
-      if (this.state.openCode){
-        olc = new OpenLocationCode();
-        codeDetails = olc.decode(this.state.openCode);
-      }
-
-      const checkIn = () => {
-        dispatch(createCheckIn(this.state.openCode));
-      }
-
-      return (
-        <div>
-          {
-            this.state.openCode ?
+    return (
+      <div>
+        {
+          openCode
+            ? (
               <div>
-                <h1>{this.state.openCode}</h1>
-                <Map position={[codeDetails.latitudeCenter, codeDetails.longitudeCenter]} />
+                <h1>
+                  {openCode}
+                </h1>
+                {
+                  codeDetails
+                    ? <div />
+                    : <div />
+                }
                 <Button onClick={checkIn}>Check In</Button>
               </div>
-            : <div/>
-          }
-          
-        </div>
-      )
-    }
+            )
+            : <div />
+        }
+      </div>
+    );
+  }
 }
 
+Checkin.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  userCheckins: PropTypes.shape({
+    count: PropTypes.number,
+    checkins: PropTypes.array,
+  }).isRequired,
+};
+
 export default connect()(Checkin);
+
+// ? <Map position={[codeDetails.latitudeCenter, codeDetails.longitudeCenter]} />
