@@ -121,7 +121,6 @@ export function receiveLogin() {
         history.replace('/');
       } else if (err) {
         history.replace('/');
-        console.log(err);
       }
     });
   };
