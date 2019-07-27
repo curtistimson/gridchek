@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { OpenLocationCode } from 'open-location-code';
 import Button from 'react-bootstrap/Button';
-import Map from '../../components/Map';
+// import Map from '../../components/Map';
 import { createCheckIn } from '../../actions/checkinActions';
 import getLocation from './getLocation';
 
@@ -11,16 +11,13 @@ class Checkin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      latitude: null,
-      longitude: null,
       openCode: null,
     };
   }
 
   componentWillMount() {
     getLocation().then((data) => {
-      this.setState(prevState => ({
-        ...prevState,
+      this.setState(() => ({
         openCode: data.openCode,
       }));
     });
@@ -52,7 +49,11 @@ class Checkin extends Component {
                 <h1>
                   {openCode}
                 </h1>
-                <Map position={[codeDetails.latitudeCenter, codeDetails.longitudeCenter]} />
+                {
+                  codeDetails
+                    ? <div />
+                    : <div />
+                }
                 <Button onClick={checkIn}>Check In</Button>
               </div>
             )
@@ -72,3 +73,5 @@ Checkin.propTypes = {
 };
 
 export default connect()(Checkin);
+
+// ? <Map position={[codeDetails.latitudeCenter, codeDetails.longitudeCenter]} />

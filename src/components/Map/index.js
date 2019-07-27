@@ -10,6 +10,7 @@ import './Map.css';
 
 function MapComponent(props) {
   const position = { props };
+  console.log('pos', position);
   return (
     position
       ? (
@@ -29,6 +30,6 @@ function MapComponent(props) {
       )
       : <div />
   );
-}
+};
 
 export default MapComponent;

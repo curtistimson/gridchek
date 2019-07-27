@@ -1,6 +1,7 @@
 import axios from 'axios';
 import ReactGA from 'react-ga';
 import config from '../config';
+import history from '../history';
 
 const AUTH_ACCESS_TOKEN = 'auth_access_token';
 
@@ -17,6 +18,7 @@ export function createCheckIn(plusCode) {
         action: 'Add',
         label: plusCode,
       });
+      history.replace('/checkin/success');
     }).catch((err) => {
       dispatch({ type: 'CHECKIN_CREATE_REJECTED', payload: err });
       ReactGA.event({
